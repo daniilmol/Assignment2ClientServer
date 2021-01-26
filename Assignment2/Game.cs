@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Resources;
+using Assignment2.Properties;
 
 namespace Assignment2
 {
@@ -45,6 +47,14 @@ namespace Assignment2
             }
             
         }
+        private void freezeBoard(bool enabled) {
+            foreach (Control c in form.Controls) {
+                Button b = c as Button;
+                if (b != null) {
+                    b.Enabled = enabled;
+                }
+            }
+        }
         public void dropPeg(object sender, EventArgs e)
         {
             Button b = (Button)sender;
@@ -58,12 +68,13 @@ namespace Assignment2
                         switch (currentPlayer)
                         {
                             case 0:
-
+                                freezeBoard(false);
                                 form.insertPieces(player1Fill, grid[0, columnHeight(0)]);
                                 board[0, HEIGHT - 1 - columnHeight(0)].setColor(Color.Red);
                                 currentPlayer = 1;
                                 break;
                             case 1:
+                                freezeBoard(false);
                                 form.insertPieces(player2Fill, grid[0, columnHeight(0)]);
                                 board[0, HEIGHT - 1 - columnHeight(0)].setColor(Color.Yellow);
                                 currentPlayer = 0;

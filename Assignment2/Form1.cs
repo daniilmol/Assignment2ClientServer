@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,6 +20,10 @@ namespace Assignment2
         public const int Scale = 100;
         private List<Rectangle> storedPieces = new List<Rectangle>();
         private List<Brush> storedPiecesColors = new List<Brush>();
+        private Receiver receiver;
+        private Thread server;
+        private Thread client;
+
 
         public Form1()
         {
@@ -26,6 +31,7 @@ namespace Assignment2
             this.Height = GameAreaHeight;
             this.Width = GameAreaWidth;
             this.StartPosition = FormStartPosition.CenterScreen;
+            receiver = new Receiver(this);
             game = new Game(this);
             game.drawBoard();
             for(int i = 0; i < 7; i++)
@@ -63,6 +69,54 @@ namespace Assignment2
             storedPiecesColors.Add(playerColor);
         }
 
-        
+        private void GameArea_Shown(object sender, EventArgs e)
+        {/**
+            Thread t = new Thread(new ThreadStart(receiver.EnterGame));
+            t.IsBackground = true;
+            t.Start();
+            Thread.Sleep(1800);
+            t.Abort();
+            if (gameID == Guid.Empty)
+            {
+                CreateNewGame();
+                MulticastSender.SendGameMsg(-9, "game created");
+                // the line above is for when there aren't any packets flowing in the port
+                // if there are no packets, Thread t will be blocked on Socket.ReceiveFrom()
+                // and calling Abort won't cancel the blocking call
+            }
+            recv.SetMulticastLoopback(false);
+            System.Diagnostics.Debug.WriteLine("started game");
+            if (playerNum % 2 == 0)
+            {
+                me = new Tank(MulticastSender.ID,
+                    rnd.Next(0, this.ClientRectangle.Width - Tank.SIZE.Width),
+                    rnd.Next((int)(this.ClientRectangle.Height * 0.55), this.ClientRectangle.Height - Tank.SIZE.Height));
+                vehicles[playerNum] = me;
+                tanks.Add((Tank)me);
+            }
+            else
+            {
+                me = new Plane(MulticastSender.ID,
+                    rnd.Next(0, this.ClientRectangle.Width - Plane.SIZE.Width),
+                    rnd.Next(0, (int)(this.ClientRectangle.Height * 0.45) - Plane.SIZE.Height));
+                vehicles[playerNum] = me;
+                planes.Add((Plane)me);
+            }
+            System.Diagnostics.Debug.WriteLine("my vehicle instatiated");
+            if (playerNum == 0)
+            {
+                SetNextPlayer();
+                hostThread = new Thread(new ThreadStart(MulticastSender.SendInvitations));
+                hostThread.IsBackground = true;
+                hostThread.Start();
+                System.Diagnostics.Debug.WriteLine("hostThread started");
+            }
+            recv.IsHost = (playerNum == 0);
+            receiverThread = new Thread(new ThreadStart(recv.run));
+            receiverThread.IsBackground = true; // thread becomes zombie if this is not explicitly set to true
+            receiverThread.Start();*/
+        }
+
+
     }
 }

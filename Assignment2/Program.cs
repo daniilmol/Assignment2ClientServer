@@ -8,6 +8,7 @@ namespace Assignment2
 {
     static class Program
     {
+        public static int PORT = 49452;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
