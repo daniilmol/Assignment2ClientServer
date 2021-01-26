@@ -54,6 +54,7 @@ namespace Assignment2
                 case 290:
                     if (columnHeight(0) != -1)
                     {
+                        checkWinState(board[0, HEIGHT - 1 - columnHeight(0)]);
                         switch (currentPlayer)
                         {
                             case 0:
@@ -186,7 +187,6 @@ namespace Assignment2
         {
             for (int i = 0; i < HEIGHT; i++)
             {
-                System.Diagnostics.Debug.WriteLine(board[columnNo, i].getColor());
                 if (board[columnNo, i].getColor() == Color.White)
                 {
                     return HEIGHT -1 - i;
@@ -212,11 +212,15 @@ namespace Assignment2
             int[] directions3 = new int[2] { 1, 0 };
             int[] directions4 = new int[2] { 1, 1 };
             int[][] directionSteps = new int[][] { directions1, directions2, directions3, directions4 };
+            System.Diagnostics.Debug.WriteLine(directionSteps[0][0] + " " + directionSteps[0][1]);
             Color centerColor = center.getColor();
             int centerX = center.getX();
             int centerY = center.getY();
             int count = 0;
+            for(int i = 0; i < directionSteps.Length; i++)
+            {
 
+            }
 
             return false;
         }
