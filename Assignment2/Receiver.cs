@@ -15,6 +15,7 @@ namespace Assignment2
         Form1 gameArea;
         Socket sock;
         EndPoint ep = (EndPoint)(Sender.iep);
+        static int senders = 0;
         public bool isHost { get; set; }
         public Receiver(Form1 gameArea) {
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
@@ -46,37 +47,22 @@ namespace Assignment2
             }
         }
         public void EnterGame()
-        {/**
+        {
             Debug.WriteLine("inside EnterGame()");
             sock.MulticastLoopback = true;
-            bool joining = false;
-            long until = DateTime.Now.Ticks + TimeSpan.TicksPerMillisecond * 1000;
-            while (DateTime.Now.Ticks < until)
+            try
             {
-                try
-                {
-                    byte[] data = new byte[1024];
-                    int recv = sock.ReceiveFrom(data, ref ep);
-                    string stringData = Encoding.ASCII.GetString(data, 0, recv);
-                    StringReader reader = new StringReader(stringData);
-                    // continue unless first line is HEADER and also the second line is 0
-                    if (!reader.ReadLine().Equals(MulticastSender.HEADER) || !reader.ReadLine().Equals("0"))
-                        continue;
-                    string msg = reader.ReadLine();
-                    Debug.WriteLine("{0}\n{1}\n", ep.ToString(), msg);
-                    string[] payload = msg.Split(',');
-                    if (joining = TryJoin(Guid.Parse(payload[0]), int.Parse(payload[1]))) // successfully joined game
-                    {
-                        break;
-                    }
-                }
-                catch (SocketException e)
-                {
-                    Debug.WriteLine("SocketException: " + e.Message);
-                }
+                byte[] data = new byte[1024];
+                int recv = sock.ReceiveFrom(data, ref ep);
+                string stringData = Encoding.ASCII.GetString(data, 0, recv);
+                StringReader reader = new StringReader(stringData);
+                
             }
-            if (!joining)
-                form.CreateNewGame();*/
+            catch (SocketException e)
+            {
+                Debug.WriteLine("SocketException: " + e.Message);
+            }
+            
         }
     }
 }
