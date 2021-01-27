@@ -236,7 +236,6 @@ namespace Assignment2
             int[] directions3 = new int[2] { 1, 0 };
             int[] directions4 = new int[2] { 1, 1 };
             int[][] directionSteps = new int[][] { directions1, directions2, directions3, directions4 };
-            System.Diagnostics.Debug.WriteLine(directionSteps[0][0] + " " + directionSteps[0][1]);
             Color centerColor = center.getColor();
             int centerX = center.getX();
             int centerY = center.getY();
@@ -247,11 +246,11 @@ namespace Assignment2
                 {
                     int xStep = directionSteps[i][0] * verticality;
                     int yStep = directionSteps[i][1] * verticality;
-                    for(int distance = 1; distance <=5; distance++)
+                    for(int distance = 0; distance <6; distance++)
                     {
                         int x = centerX + xStep * distance;
                         int y = centerY + yStep * distance;
-                        if(outOfBounds(x, y))
+                        if (outOfBounds(x, y))
                             break;
                         if (board[x, y].getColor() == centerColor)
                             slotCount++;
@@ -268,7 +267,8 @@ namespace Assignment2
 
         private bool outOfBounds(int x, int y)
         {
-            if(x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
+            System.Diagnostics.Debug.WriteLine("x: " + x + " y: " + y + " WIDTH: " + WIDTH + " HEIGHT: " + HEIGHT);
+            if (x < 0 || x > WIDTH - 1 || y < 0 || y > HEIGHT - 1)
             {
                 return true;
             }
