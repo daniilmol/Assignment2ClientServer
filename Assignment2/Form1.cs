@@ -89,7 +89,7 @@ namespace Assignment2
 
             receiver.isHost = (playerNum == 0);
             server = new Thread(new ThreadStart(receiver.run));
-            server.IsBackground = true; // thread becomes zombie if this is not explicitly set to true
+            server.IsBackground = true; 
             server.Start();
         }
 

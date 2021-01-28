@@ -19,11 +19,20 @@ namespace Assignment2
             sock = new UdpClient();
             counter++;
         }
-        private static void Send(int msgType, string msg) { 
-            
+        private static void Send(int msgType, string msg) {
+            if (msgType == -1) // game msg
+            {
+                
+            }
+            else
+            {
+                msg = msgType + "\n" + msg;
+            }
+            byte[] data = Encoding.ASCII.GetBytes(msg);
+            sock.Send(data, data.Length, iep);
         }
-        public static void SendGameMsg(int gameMsgType, string msg) { 
-        
+        public static void SendGameMsg(int gameMsgType, string msg) {
+            Send(-1, gameMsgType + "," + msg);
         }
     }
 

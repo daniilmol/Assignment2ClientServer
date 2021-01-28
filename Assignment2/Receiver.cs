@@ -38,7 +38,7 @@ namespace Assignment2
                     int recv = sock.ReceiveFrom(data, ref ep);
                     string stringData = Encoding.ASCII.GetString(data, 0, recv);
                     StringReader reader = new StringReader(stringData);
-                    
+                    HandleGameMsg(reader.ReadLine());
                 }
             }
             catch (SocketException e) {
@@ -63,6 +63,29 @@ namespace Assignment2
                 Debug.WriteLine("SocketException: " + e.Message);
             }
             
+        }
+        private void HandleGameMsg(string msg)
+        {
+            string[] ar = msg.Split(',');
+            int type = int.Parse(ar[0]);
+            int playerNum, x, y, dir, scoreType, score;
+            Console.WriteLine("In Handle Game Msg");
+            switch (type)
+            {
+                case 0: // peg placement
+                    //playerID = Guid.Parse(ar[1]);
+                    //playerNum = int.Parse(ar[2]);
+                    //x = int.Parse(ar[3]);
+                    //y = int.Parse(ar[4]);
+                    //dir = int.Parse(ar[5]);
+                    //form.MovePlayer(playerID, playerNum, x, y, dir);
+                    break;
+                case -1: // disconnect
+                    //playerID = Guid.Parse(ar[1]);
+                    //playerNum = int.Parse(ar[2]);
+                    //form.RemovePlayer(playerID, playerNum);
+                    break;
+            }
         }
     }
 }
