@@ -34,15 +34,12 @@ namespace Assignment2
                 while (true)
                 {
                     byte[] data = new byte[1024];
-                    Console.WriteLine(sock.Available);
-                    if (sock.Available > 0)
-                    {
+                    //Console.WriteLine(sock.Available);
                         int recv = sock.ReceiveFrom(data, ref ep);
                         string stringData = Encoding.ASCII.GetString(data, 0, recv);
                         StringReader reader = new StringReader(stringData);
                         HandleGameMsg(reader.ReadLine());
                         Console.WriteLine("Ran handle game message method");
-                    }
                 }
             }
             catch (SocketException e) {
