@@ -47,7 +47,7 @@ namespace Assignment2
             }
             
         }
-        private void freezeBoard(bool enabled) {
+        public void freezeBoard(bool enabled) {
             foreach (Control c in form.Controls) {
                 Button b = c as Button;
                 if (b != null) {
@@ -72,6 +72,9 @@ namespace Assignment2
                                 board[0, HEIGHT - 1 - columnHeight(0)].setColor(Color.Red);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[0, HEIGHT - 1 - columnHeight(0)]));
                                 currentPlayer = 1;
+                                Console.WriteLine("Y: " + (HEIGHT - 1 - columnHeight(0)));
+                                Sender.SendGameMsg(0, 0 + "," + (HEIGHT - 1 - columnHeight(0)));
+                                //Sender.SendGameMsg(1, "Unfreeze");
                                 break;
                             case 1:
                                 freezeBoard(false);

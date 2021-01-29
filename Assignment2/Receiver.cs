@@ -73,6 +73,9 @@ namespace Assignment2
             switch (type)
             {
                 case 0: // peg placement
+                    x = int.Parse(ar[0]);
+                    y = int.Parse(ar[1]);
+                    Console.WriteLine("X: " + x + "Y: " + y);
                     //playerID = Guid.Parse(ar[1]);
                     //playerNum = int.Parse(ar[2]);
                     //x = int.Parse(ar[3]);
