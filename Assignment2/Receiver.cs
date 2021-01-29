@@ -15,7 +15,6 @@ namespace Assignment2
         Form1 gameArea;
         Socket sock;
         EndPoint ep = (EndPoint)(Sender.iep);
-        static int senders = 0;
         public bool isHost { get; set; }
         public Receiver(Form1 gameArea) {
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
@@ -35,16 +34,22 @@ namespace Assignment2
                 while (true)
                 {
                     byte[] data = new byte[1024];
-                    int recv = sock.ReceiveFrom(data, ref ep);
-                    string stringData = Encoding.ASCII.GetString(data, 0, recv);
-                    StringReader reader = new StringReader(stringData);
-                    HandleGameMsg(reader.ReadLine());
+                    Console.WriteLine(sock.Available);
+                    if (sock.Available > 0)
+                    {
+                        int recv = sock.ReceiveFrom(data, ref ep);
+                        string stringData = Encoding.ASCII.GetString(data, 0, recv);
+                        StringReader reader = new StringReader(stringData);
+                        HandleGameMsg(reader.ReadLine());
+                        Console.WriteLine("Ran handle game message method");
+                    }
                 }
             }
             catch (SocketException e) {
                 Debug.WriteLine("Problem with the socket, " + e.Message);
                 sock.Close();
             }
+            Console.WriteLine("Ending run method");
         }
         public void EnterGame()
         {
@@ -66,6 +71,7 @@ namespace Assignment2
         }
         private void HandleGameMsg(string msg)
         {
+            System.Windows.Forms.Application.Exit();
             string[] ar = msg.Split(',');
             int type = int.Parse(ar[0]);
             int playerNum, x, y, dir, scoreType, score;

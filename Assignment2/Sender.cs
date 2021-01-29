@@ -30,6 +30,7 @@ namespace Assignment2
             }
             byte[] data = Encoding.ASCII.GetBytes(msg);
             sock.Send(data, data.Length, iep);
+            Console.WriteLine("Sent " + msg);
         }
         public static void SendGameMsg(int gameMsgType, string msg) {
             Send(-1, gameMsgType + "," + msg);

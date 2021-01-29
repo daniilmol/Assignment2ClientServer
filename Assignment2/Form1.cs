@@ -80,13 +80,6 @@ namespace Assignment2
             receiver.SetMulticastLoopback(false);
             System.Diagnostics.Debug.WriteLine("started game");
 
-            /**
-            hostThread = new Thread(new ThreadStart(Sender.SendInvitations));
-            hostThread.IsBackground = true;
-            hostThread.Start();
-            System.Diagnostics.Debug.WriteLine("hostThread started");'
-                */
-
             receiver.isHost = (playerNum == 0);
             server = new Thread(new ThreadStart(receiver.run));
             server.IsBackground = true; 
