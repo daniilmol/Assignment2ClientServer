@@ -17,6 +17,7 @@ namespace Assignment2
 
         static Sender() {
             sock = new UdpClient();
+            //sock.Connect(IPAddress.Parse("239.50.50.51"), Program.PORT);
             counter++;
         }
         private static void Send(int msgType, string msg) {

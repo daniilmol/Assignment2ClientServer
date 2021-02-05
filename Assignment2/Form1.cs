@@ -24,6 +24,7 @@ namespace Assignment2
         private Thread server;
         private Thread client;
         private int playerNum = 0;
+        private bool freeze;
 
         public Form1()
         {
@@ -34,16 +35,8 @@ namespace Assignment2
             this.Width = GameAreaWidth;
 
             this.StartPosition = FormStartPosition.CenterScreen;
-
-            receiver = new Receiver(this);
-            Console.WriteLine("2");
-
-            GameArea_Shown();
-            Console.WriteLine("3");
             game = new Game(this);
-            Console.WriteLine("4");
-            game.drawBoard();
-            Console.WriteLine("5");
+
             for (int i = 0; i < 7; i++)
             {
                 Point newLoc = new Point(i * Scale + 290, 10);
@@ -54,6 +47,27 @@ namespace Assignment2
                 newLoc.Offset(0, b.Height + 5);
                 Controls.Add(b);
                 b.Click += new EventHandler(game.dropPeg);
+            }
+            receiver = new Receiver(this);
+            Console.WriteLine("2");
+
+            GameArea_Shown();
+            Console.WriteLine("3");
+            Console.WriteLine("4");
+            game.drawBoard();
+            Console.WriteLine("5");
+            
+        }
+        public void freezeBoard(bool enabled)
+        {
+            Console.WriteLine("Freezing board: " + !enabled);
+            foreach (Control c in this.Controls)
+            {
+                Button b = c as Button;
+                if (b != null)
+                {
+                    b.Enabled = enabled;
+                }
             }
         }
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -71,12 +85,13 @@ namespace Assignment2
 
         }
 
-        public void insertPieces(Brush playerColor, Rectangle rec)
+        public void insertPieces(Brush playerColor, Rectangle rec, bool freeze)
         {
             Graphics graphics = this.CreateGraphics();
             graphics.FillEllipse(playerColor, rec);
             storedPieces.Add(rec);
             storedPiecesColors.Add(playerColor);
+            this.freeze = freeze;
         }
 
         private void GameArea_Shown()
@@ -89,10 +104,10 @@ namespace Assignment2
 
             if (!receiver.bTest)
             {
-               // receiver.SetMulticastLoopback(false);
+                receiver.SetMulticastLoopback(false);
                 System.Diagnostics.Debug.WriteLine("started game");
 
-                receiver.isHost = (playerNum == 0);
+                //receiver.isHost = (playerNum == 0);
                 server = new Thread(new ThreadStart(receiver.run));
                 server.IsBackground = true;
                 server.Start();

@@ -15,14 +15,14 @@ namespace Assignment2
     class Game
     {
         private const int WIDTH = 7;
-        private const int HEIGHT = 6;
+        public const int HEIGHT = 6;
         private Brush player1Fill;
         private Brush player2Fill;
-        private static Slot[,] board;
+        public static Slot[,] board;
         private Form1 form;
         private int Scale = Form1.Scale;
         private Rectangle[] borders;
-        private int currentPlayer;
+        public static int currentPlayer;
         public static Rectangle[,] grid;
         public Game(Form1 gameArea)
         {
@@ -30,6 +30,7 @@ namespace Assignment2
             player1Fill = Brushes.Red;
             player2Fill = Brushes.Yellow;
             currentPlayer = 0;
+
         }
         public void drawBoard()
         {
@@ -47,7 +48,6 @@ namespace Assignment2
                     grid[x, y] = new Rectangle(x * Scale + 290, y * Scale + 50, Scale, Scale);
                 }
             }
-
         }
         public void freezeBoard(bool enabled)
         {
@@ -72,20 +72,19 @@ namespace Assignment2
                         switch (currentPlayer)
                         {
                             case 0:
-                                freezeBoard(false);
-                                form.insertPieces(player1Fill, grid[0, columnHeight(0)]);
+                                form.insertPieces(player1Fill, grid[0, columnHeight(0)], false);
                                 board[0, HEIGHT - 1 - columnHeight(0)].setColor(Color.Red);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[0, HEIGHT - 1 - columnHeight(0)]));
+                                Sender.SendGameMsg(0, 0 + "," + (HEIGHT - 1 - columnHeight(0)) + "," + currentPlayer);
                                 currentPlayer = 1;
                                 Console.WriteLine("Y: " + (HEIGHT - 1 - columnHeight(0)));
-                                Sender.SendGameMsg(0, 0 + "," + (HEIGHT - 1 - columnHeight(0)));
                                 //Sender.SendGameMsg(1, "Unfreeze");
                                 break;
                             case 1:
-                                freezeBoard(false);
-                                form.insertPieces(player2Fill, grid[0, columnHeight(0)]);
+                                form.insertPieces(player2Fill, grid[0, columnHeight(0)], false);
                                 board[0, HEIGHT - 1 - columnHeight(0)].setColor(Color.Yellow);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[0, HEIGHT - 1 - columnHeight(0)]));
+                                Sender.SendGameMsg(0, 0 + "," + (HEIGHT - 1 - columnHeight(0)) + "," + currentPlayer);
                                 currentPlayer = 0;
                                 break;
                         }
@@ -98,15 +97,17 @@ namespace Assignment2
                         switch (currentPlayer)
                         {
                             case 0:
-                                form.insertPieces(player1Fill, grid[1, columnHeight(1)]);
+                                form.insertPieces(player1Fill, grid[1, columnHeight(1)], false);
                                 board[1, HEIGHT - 1 - columnHeight(1)].setColor(Color.Red);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[1, HEIGHT - 1 - columnHeight(1)]));
+                                Sender.SendGameMsg(0, 1 + "," + (HEIGHT - 1 - columnHeight(1)) + "," + currentPlayer);
                                 currentPlayer = 1;
                                 break;
                             case 1:
-                                form.insertPieces(player2Fill, grid[1, columnHeight(1)]);
+                                form.insertPieces(player2Fill, grid[1, columnHeight(1)], false);
                                 board[1, HEIGHT - 1 - columnHeight(1)].setColor(Color.Yellow);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[1, HEIGHT - 1 - columnHeight(1)]));
+                                Sender.SendGameMsg(0, 1 + "," + (HEIGHT - 1 - columnHeight(1)) + "," + currentPlayer);
                                 currentPlayer = 0;
                                 break;
                         }
@@ -118,15 +119,17 @@ namespace Assignment2
                         switch (currentPlayer)
                         {
                             case 0:
-                                form.insertPieces(player1Fill, grid[2, columnHeight(2)]);
+                                form.insertPieces(player1Fill, grid[2, columnHeight(2)], false);
                                 board[2, HEIGHT - 1 - columnHeight(2)].setColor(Color.Red);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[2, HEIGHT - 1 - columnHeight(2)]));
+                                Sender.SendGameMsg(0, 2 + "," + (HEIGHT - 1 - columnHeight(2)) + "," + currentPlayer);
                                 currentPlayer = 1;
                                 break;
                             case 1:
-                                form.insertPieces(player2Fill, grid[2, columnHeight(2)]);
+                                form.insertPieces(player2Fill, grid[2, columnHeight(2)], false);
                                 board[2, HEIGHT - 1 - columnHeight(2)].setColor(Color.Yellow);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[2, HEIGHT - 1 - columnHeight(2)]));
+                                Sender.SendGameMsg(0, 2 + "," + (HEIGHT - 1 - columnHeight(2)) + "," + currentPlayer);
                                 currentPlayer = 0;
                                 break;
                         }
@@ -138,15 +141,17 @@ namespace Assignment2
                         switch (currentPlayer)
                         {
                             case 0:
-                                form.insertPieces(player1Fill, grid[3, columnHeight(3)]);
+                                form.insertPieces(player1Fill, grid[3, columnHeight(3)], false);
                                 board[3, HEIGHT - 1 - columnHeight(3)].setColor(Color.Red);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[3, HEIGHT - 1 - columnHeight(3)]));
+                                Sender.SendGameMsg(0, 3 + "," + (HEIGHT - 1 - columnHeight(3)) + "," + currentPlayer);
                                 currentPlayer = 1;
                                 break;
                             case 1:
-                                form.insertPieces(player2Fill, grid[3, columnHeight(3)]);
+                                form.insertPieces(player2Fill, grid[3, columnHeight(3)], false);
                                 board[3, HEIGHT - 1 - columnHeight(3)].setColor(Color.Yellow);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[3, HEIGHT - 1 - columnHeight(3)]));
+                                Sender.SendGameMsg(0, 3 + "," + (HEIGHT - 1 - columnHeight(3)) + "," + currentPlayer);
                                 currentPlayer = 0;
                                 break;
                         }
@@ -158,15 +163,17 @@ namespace Assignment2
                         switch (currentPlayer)
                         {
                             case 0:
-                                form.insertPieces(player1Fill, grid[4, columnHeight(4)]);
+                                form.insertPieces(player1Fill, grid[4, columnHeight(4)], false);
                                 board[4, HEIGHT - 1 - columnHeight(4)].setColor(Color.Red);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[4, HEIGHT - 1 - columnHeight(4)]));
+                                Sender.SendGameMsg(0, 4 + "," + (HEIGHT - 1 - columnHeight(4)) + "," + currentPlayer);
                                 currentPlayer = 1;
                                 break;
                             case 1:
-                                form.insertPieces(player2Fill, grid[4, columnHeight(4)]);
+                                form.insertPieces(player2Fill, grid[4, columnHeight(4)], false);
                                 board[4, HEIGHT - 1 - columnHeight(4)].setColor(Color.Yellow);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[4, HEIGHT - 1 - columnHeight(4)]));
+                                Sender.SendGameMsg(0, 4 + "," + (HEIGHT - 1 - columnHeight(4)) + "," + currentPlayer);
                                 currentPlayer = 0;
                                 break;
                         }
@@ -178,15 +185,17 @@ namespace Assignment2
                         switch (currentPlayer)
                         {
                             case 0:
-                                form.insertPieces(player1Fill, grid[5, columnHeight(5)]);
+                                form.insertPieces(player1Fill, grid[5, columnHeight(5)], false);
                                 board[5, HEIGHT - 1 - columnHeight(5)].setColor(Color.Red);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[5, HEIGHT - 1 - columnHeight(5)]));
+                                Sender.SendGameMsg(0, 5 + "," + (HEIGHT - 1 - columnHeight(5)) + "," + currentPlayer);
                                 currentPlayer = 1;
                                 break;
                             case 1:
-                                form.insertPieces(player2Fill, grid[5, columnHeight(5)]);
+                                form.insertPieces(player2Fill, grid[5, columnHeight(5)], false);
                                 board[5, HEIGHT - 1 - columnHeight(5)].setColor(Color.Yellow);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[5, HEIGHT - 1 - columnHeight(5)]));
+                                Sender.SendGameMsg(0, 5 + "," + (HEIGHT - 1 - columnHeight(5)) + "," + currentPlayer);
                                 currentPlayer = 0;
                                 break;
                         }
@@ -198,15 +207,17 @@ namespace Assignment2
                         switch (currentPlayer)
                         {
                             case 0:
-                                form.insertPieces(player1Fill, grid[6, columnHeight(6)]);
+                                form.insertPieces(player1Fill, grid[6, columnHeight(6)], false);
                                 board[6, HEIGHT - 1 - columnHeight(6)].setColor(Color.Red);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[6, HEIGHT - 1 - columnHeight(6)]));
+                                Sender.SendGameMsg(0, 6 + "," + (HEIGHT - 1 - columnHeight(6)) + "," + currentPlayer);
                                 currentPlayer = 1;
                                 break;
                             case 1:
-                                form.insertPieces(player2Fill, grid[6, columnHeight(6)]);
+                                form.insertPieces(player2Fill, grid[6, columnHeight(6)], false);
                                 board[6, HEIGHT - 1 - columnHeight(6)].setColor(Color.Yellow);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[6, HEIGHT - 1 - columnHeight(6)]));
+                                Sender.SendGameMsg(0, 6 + "," + (HEIGHT - 1 - columnHeight(6)) + "," + currentPlayer);
                                 currentPlayer = 0;
                                 break;
                         }
