@@ -28,13 +28,23 @@ namespace Assignment2
         public Form1()
         {
             InitializeComponent();
+            Console.WriteLine("1");
             this.Height = GameAreaHeight;
+
             this.Width = GameAreaWidth;
+
             this.StartPosition = FormStartPosition.CenterScreen;
+
             receiver = new Receiver(this);
+            Console.WriteLine("2");
+
+            GameArea_Shown();
+            Console.WriteLine("3");
             game = new Game(this);
+            Console.WriteLine("4");
             game.drawBoard();
-            for(int i = 0; i < 7; i++)
+            Console.WriteLine("5");
+            for (int i = 0; i < 7; i++)
             {
                 Point newLoc = new Point(i * Scale + 290, 10);
                 Button b = new Button();
@@ -53,12 +63,12 @@ namespace Assignment2
             {
                 graphics.DrawRectangle(new Pen(Color.Black, 10), game.getBorders()[i]);
             }
-            
+
             for (int i = 0; i < storedPieces.Count; i++)
             {
                 graphics.FillEllipse(storedPiecesColors[i], storedPieces[i]);
             }
-            
+
         }
 
         public void insertPieces(Brush playerColor, Rectangle rec)
@@ -69,21 +79,25 @@ namespace Assignment2
             storedPiecesColors.Add(playerColor);
         }
 
-        private void GameArea_Shown(object sender, EventArgs e)
+        private void GameArea_Shown()
         {
-            Thread t = new Thread(new ThreadStart(receiver.EnterGame));
-            t.IsBackground = true;
-            t.Start();
-            Thread.Sleep(1800);
-            t.Abort();
+            //Thread t = new Thread(new ThreadStart(receiver.EnterGame));
+            //t.IsBackground = true;
+            //t.Start();
+            //Thread.Sleep(1800);
+            //t.Abort();
 
-            receiver.SetMulticastLoopback(false);
-            System.Diagnostics.Debug.WriteLine("started game");
+            if (!receiver.bTest)
+            {
+               // receiver.SetMulticastLoopback(false);
+                System.Diagnostics.Debug.WriteLine("started game");
 
-            receiver.isHost = (playerNum == 0);
-            server = new Thread(new ThreadStart(receiver.run));
-            server.IsBackground = true; 
-            server.Start();
+                receiver.isHost = (playerNum == 0);
+                server = new Thread(new ThreadStart(receiver.run));
+                server.IsBackground = true;
+                server.Start();
+            }
+
         }
 
 

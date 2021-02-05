@@ -15,8 +15,11 @@ namespace Assignment2
         [STAThread]
         static void Main()
         {
+            Console.WriteLine("before 1");
             Application.EnableVisualStyles();
+            Console.WriteLine("before2");
             Application.SetCompatibleTextRenderingDefault(false);
+            Console.WriteLine("before 3");
             Application.Run(new Form1());
         }
     }

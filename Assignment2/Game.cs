@@ -18,39 +18,44 @@ namespace Assignment2
         private const int HEIGHT = 6;
         private Brush player1Fill;
         private Brush player2Fill;
-        private Slot[,] board;
+        private static Slot[,] board;
         private Form1 form;
         private int Scale = Form1.Scale;
         private Rectangle[] borders;
         private int currentPlayer;
-        private Rectangle[,] grid;
-        public Game(Form1 gameArea) {
+        public static Rectangle[,] grid;
+        public Game(Form1 gameArea)
+        {
             form = gameArea;
             player1Fill = Brushes.Red;
             player2Fill = Brushes.Yellow;
             currentPlayer = 0;
         }
-        public void drawBoard() {
+        public void drawBoard()
+        {
             board = new Slot[WIDTH, HEIGHT];
             createSlots();
             borders = new Rectangle[WIDTH * HEIGHT];
-            grid = new Rectangle[WIDTH , HEIGHT];
+            grid = new Rectangle[WIDTH, HEIGHT];
             int i = 0;
             for (int x = 0; x < WIDTH; x++)
             {
-                for(int y = 0; y < HEIGHT; y++)
+                for (int y = 0; y < HEIGHT; y++)
                 {
                     borders[i] = new Rectangle(x * Scale + 290, y * Scale + 50, Scale, Scale);
                     i++;
                     grid[x, y] = new Rectangle(x * Scale + 290, y * Scale + 50, Scale, Scale);
                 }
             }
-            
+
         }
-        public void freezeBoard(bool enabled) {
-            foreach (Control c in form.Controls) {
+        public void freezeBoard(bool enabled)
+        {
+            foreach (Control c in form.Controls)
+            {
                 Button b = c as Button;
-                if (b != null) {
+                if (b != null)
+                {
                     b.Enabled = enabled;
                 }
             }
@@ -84,7 +89,7 @@ namespace Assignment2
                                 currentPlayer = 0;
                                 break;
                         }
-                        
+
                     }
                     break;
                 case 390:
@@ -210,22 +215,22 @@ namespace Assignment2
             }
         }
 
-        private int columnHeight(int columnNo)
+        public static int columnHeight(int columnNo)
         {
             for (int i = 0; i < HEIGHT; i++)
             {
                 if (board[columnNo, i].getColor() == Color.White)
                 {
-                    return HEIGHT -1 - i;
+                    return HEIGHT - 1 - i;
                 }
             }
             return -1;
         }
         private void createSlots()
         {
-            for(int x = 0; x < WIDTH; x++)
+            for (int x = 0; x < WIDTH; x++)
             {
-                for(int y = 0; y < HEIGHT; y++)
+                for (int y = 0; y < HEIGHT; y++)
                 {
                     board[x, y] = new Slot(x, y);
                 }
@@ -234,7 +239,7 @@ namespace Assignment2
 
         private bool checkWinState(Slot center)
         {
-            int[] directions1 = new int [2] {0, -1};
+            int[] directions1 = new int[2] { 0, -1 };
             int[] directions2 = new int[2] { 1, -1 };
             int[] directions3 = new int[2] { 1, 0 };
             int[] directions4 = new int[2] { 1, 1 };
@@ -242,14 +247,14 @@ namespace Assignment2
             Color centerColor = center.getColor();
             int centerX = center.getX();
             int centerY = center.getY();
-            for(int i = 0; i < directionSteps.Length; i++)
+            for (int i = 0; i < directionSteps.Length; i++)
             {
                 int slotCount = 0;
-                for(int verticality = -1; verticality <= 1; verticality += 2)
+                for (int verticality = -1; verticality <= 1; verticality += 2)
                 {
                     int xStep = directionSteps[i][0] * verticality;
                     int yStep = directionSteps[i][1] * verticality;
-                    for(int distance = 0; distance <6; distance++)
+                    for (int distance = 0; distance < 6; distance++)
                     {
                         int x = centerX + xStep * distance;
                         int y = centerY + yStep * distance;
@@ -257,7 +262,7 @@ namespace Assignment2
                             break;
                         if (board[x, y].getColor() == centerColor)
                             slotCount++;
-                        else 
+                        else
                             break;
                     }
                 }

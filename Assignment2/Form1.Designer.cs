@@ -39,7 +39,6 @@ namespace Assignment2
             this.ClientSize = new System.Drawing.Size(936, 537);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.GameArea_Shown);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.ResumeLayout(false);
 
