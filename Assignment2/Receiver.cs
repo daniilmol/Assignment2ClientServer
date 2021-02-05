@@ -36,7 +36,9 @@ namespace Assignment2
             {
                 sock.Bind(test);
                 isHost = true;
-                
+                sock.MulticastLoopback = true;
+                sock.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership, new MulticastOption(IPAddress.Parse("239.50.50.51")));
+
                 //gameArea.freezeBoard(false);
 
             }
@@ -45,12 +47,16 @@ namespace Assignment2
                 bTest = true;
                 Console.WriteLine($"Already opened, {e}");
                 isHost = false;
+                //sock.MulticastLoopback = false;
+
+
+
                 //gameArea.freezeBoard(true);
             }
 
-            sock.MulticastLoopback = false;
+
+
             Debug.WriteLine("Listening on port " + Program.PORT);
-            sock.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership, new MulticastOption(IPAddress.Parse("239.50.50.51")));
             this.gameArea = gameArea;
         }
         public void SetMulticastLoopback(bool b)
@@ -71,13 +77,12 @@ namespace Assignment2
                         //Console.WriteLine(sock.Available);
                         sock.MulticastLoopback = true;
                         int recv = sock.ReceiveFrom(data, ref ep);
-                        sock.MulticastLoopback = false;
                         string stringData = Encoding.ASCII.GetString(data, 0, recv);
                         StringReader reader = new StringReader(stringData);
                         HandleGameMsg(reader.ReadLine());
                         Console.WriteLine("Ran handle game message method");
                     }
-                    catch (SocketException e) { }
+                    catch (SocketException e) { sock.Close(); }
                 }
             }
             catch (SocketException e)
@@ -89,7 +94,8 @@ namespace Assignment2
         }
         public void EnterGame()
         {
-            Debug.WriteLine("inside EnterGame()");
+            //Debug.WriteLine("inside EnterGame()");
+            sock.MulticastLoopback = true;
             try
             {
 
@@ -107,41 +113,44 @@ namespace Assignment2
         }
         private void HandleGameMsg(string msg)
         {
-            //sock.MulticastLoopback = false;
+            
             string[] ar = msg.Split(',');
             int type = int.Parse(ar[0]);
             int playerNum, x, y, dir, scoreType, score;
             Console.WriteLine("In Handle Game Msg");
-            switch (type)
-            {
-                case 0: // peg placement
-                    x = int.Parse(ar[1]);
-                    int player = int.Parse(ar[3]);
-                    Console.WriteLine("Player is: " + player);
-                    if (player == 0)
-                    {
-                        gameArea.insertPieces(Brushes.Red, Game.grid[x, Game.columnHeight(x)], true);
-                        Game.board[x, Game.HEIGHT - 1 - Game.columnHeight(x)].setColor(Color.Red);
-                        Game.currentPlayer = 0;
-                    }
-                    else if(player == 1){
-                        gameArea.insertPieces(Brushes.Yellow, Game.grid[x, Game.columnHeight(x)], true);
-                        Game.board[x, Game.HEIGHT - 1 - Game.columnHeight(x)].setColor(Color.Yellow);
-                        Game.currentPlayer = 1;
-                    }
-                    //playerID = Guid.Parse(ar[1]);
-                    //playerNum = int.Parse(ar[2]);
-                    //x = int.Parse(ar[3]);
-                    //y = int.Parse(ar[4]);
-                    //dir = int.Parse(ar[5]);
-                    //form.MovePlayer(playerID, playerNum, x, y, dir);
-                    break;
-                case -1: // disconnect
-                    //playerID = Guid.Parse(ar[1]);
-                    //playerNum = int.Parse(ar[2]);
-                    //form.RemovePlayer(playerID, playerNum);
-                    break;
-            }
+            sock.MulticastLoopback = false;
+                switch (type)
+                {
+                    case 0: // peg placement
+
+                        x = int.Parse(ar[1]);
+                        int player = int.Parse(ar[3]);
+                        Console.WriteLine("Player is: " + player);
+                        if (player == 0)
+                        {
+                            gameArea.insertPieces(Brushes.Red, Game.grid[x, Game.columnHeight(x)], true);
+                            Game.board[x, Game.HEIGHT - 1 - Game.columnHeight(x)].setColor(Color.Red);
+                            Game.currentPlayer = 0;
+                        }
+                        else if (player == 1)
+                        {
+                            gameArea.insertPieces(Brushes.Yellow, Game.grid[x, Game.columnHeight(x)], true);
+                            Game.board[x, Game.HEIGHT - 1 - Game.columnHeight(x)].setColor(Color.Yellow);
+                            Game.currentPlayer = 1;
+                        }
+                        //playerID = Guid.Parse(ar[1]);
+                        //playerNum = int.Parse(ar[2]);
+                        //x = int.Parse(ar[3]);
+                        //y = int.Parse(ar[4]);
+                        //dir = int.Parse(ar[5]);
+                        //form.MovePlayer(playerID, playerNum, x, y, dir);
+                        break;
+                    case -1: // disconnect
+                             //playerID = Guid.Parse(ar[1]);
+                             //playerNum = int.Parse(ar[2]);
+                             //form.RemovePlayer(playerID, playerNum);
+                        break;
+                }
         }
     }
 }

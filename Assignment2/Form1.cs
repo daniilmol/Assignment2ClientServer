@@ -96,12 +96,6 @@ namespace Assignment2
 
         private void GameArea_Shown()
         {
-            //Thread t = new Thread(new ThreadStart(receiver.EnterGame));
-            //t.IsBackground = true;
-            //t.Start();
-            //Thread.Sleep(1800);
-            //t.Abort();
-
             if (!receiver.bTest)
             {
                 receiver.SetMulticastLoopback(false);
