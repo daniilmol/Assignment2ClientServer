@@ -26,6 +26,8 @@ namespace Assignment2
         private int playerNum = 0;
         private bool freeze;
 
+        public Game getGame(){return game;}
+
         public Form1()
         {
             InitializeComponent();

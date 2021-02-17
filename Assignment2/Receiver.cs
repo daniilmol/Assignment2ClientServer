@@ -137,12 +137,14 @@ namespace Assignment2
                             gameArea.insertPieces(Brushes.Red, Game.grid[x, Game.columnHeight(x)], true);
                             Game.board[x, Game.HEIGHT - 1 - Game.columnHeight(x)].setColor(Color.Red);
                             Game.currentPlayer = 0;
+                            gameArea.freezeBoard(true);
                         }
                         else if (player == 1)
                         {
                             gameArea.insertPieces(Brushes.Yellow, Game.grid[x, Game.columnHeight(x)], true);
                             Game.board[x, Game.HEIGHT - 1 - Game.columnHeight(x)].setColor(Color.Yellow);
                             Game.currentPlayer = 1;
+                            gameArea.freezeBoard(true);
                         }
                         break;
                     case -1: // disconnect

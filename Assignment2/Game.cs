@@ -276,6 +276,7 @@ namespace Assignment2
                     }
                     break;
             }
+            freezeBoard(false);
         }
 
         public static int columnHeight(int columnNo)
