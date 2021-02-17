@@ -24,10 +24,8 @@ namespace Assignment2
         private Thread server;
         private Thread client;
         private int playerNum = 0;
-        private bool freeze = true;
         private bool frozen;
         private bool running = true;
-
 
         public Form1()
         {
@@ -89,13 +87,12 @@ namespace Assignment2
             }
         }
 
-        public void insertPieces(Brush playerColor, Rectangle rec, bool freeze)
+        public void insertPieces(Brush playerColor, Rectangle rec)
         {
             Graphics graphics = this.CreateGraphics();
             graphics.FillEllipse(playerColor, rec);
             storedPieces.Add(rec);
             storedPiecesColors.Add(playerColor);
-            this.freeze = freeze;
         }
 
         private void GameArea_Shown()

@@ -15,6 +15,7 @@ namespace Assignment2
 {
     class Receiver
     {
+        bool locked = false;
         Form1 gameArea;
         public Socket sock
         {
@@ -127,42 +128,35 @@ namespace Assignment2
             int playerNum, x, y, dir, scoreType, score;
             Console.WriteLine("In Handle Game Msg");
             sock.MulticastLoopback = false;
+            Debug.Write("TYPE: " + type);
                 switch (type)
                 {
                     case 0: // peg placement
-
-                        x = int.Parse(ar[1]);
-                        int player = int.Parse(ar[3]);
-                        Console.WriteLine("Player is: " + player);
-                        if (player == 0)
-                        {
-                            gameArea.insertPieces(Brushes.Red, Game.grid[x, Game.columnHeight(x)], true);
-                            Game.board[x, Game.HEIGHT - 1 - Game.columnHeight(x)].setColor(Color.Red);
-                            Game.currentPlayer = 0;
+                        if(int.Parse(ar[4]) == 0){
+                            x = int.Parse(ar[1]);
+                            int player = int.Parse(ar[3]);
+                            Console.WriteLine("Player is: " + player);
+                            if (player == 0)
+                            {
+                                gameArea.insertPieces(Brushes.Red, Game.grid[x, Game.columnHeight(x)]);
+                                Game.board[x, Game.HEIGHT - 1 - Game.columnHeight(x)].setColor(Color.Red);
+                                Game.currentPlayer = 1;
+                                gameArea.freezeBoard(true);
+                            }
+                            else if (player == 1)
+                            {
+                                gameArea.insertPieces(Brushes.Yellow, Game.grid[x, Game.columnHeight(x)]);
+                                Game.board[x, Game.HEIGHT - 1 - Game.columnHeight(x)].setColor(Color.Yellow);
+                                Game.currentPlayer = 0;
+                                gameArea.freezeBoard(true);
+                            }
                             gameArea.freezeBoard(true);
+                        } else {
+                            gameArea.freezeBoard(false);
                         }
-                        else if (player == 1)
-                        {
-                            gameArea.insertPieces(Brushes.Yellow, Game.grid[x, Game.columnHeight(x)], true);
-                            Game.board[x, Game.HEIGHT - 1 - Game.columnHeight(x)].setColor(Color.Yellow);
-                            Game.currentPlayer = 1;
-                            gameArea.freezeBoard(true);
-                        }
+                        
                         break;
-                case 1:
-                    if (int.Parse(ar[1]) == 0)
-                    {
-
-                    }
-                    else {
-                        Debug.WriteLine("Froze Baord");
-                        gameArea.N();
-                    }
-                    break;
-                    case -1: // disconnect
-                             //playerID = Guid.Parse(ar[1]);
-                             //playerNum = int.Parse(ar[2]);
-                             //form.RemovePlayer(playerID, playerNum);
+                    case 1:
                         break;
                 }
         }
