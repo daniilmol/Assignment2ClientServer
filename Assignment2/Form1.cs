@@ -24,7 +24,9 @@ namespace Assignment2
         private Thread server;
         private Thread client;
         private int playerNum = 0;
-        private bool freeze;
+        private bool freeze = true;
+        private bool frozen;
+        private bool running = true;
 
         public Form1()
         {
@@ -66,7 +68,9 @@ namespace Assignment2
                 Button b = c as Button;
                 if (b != null)
                 {
-                    b.Enabled = enabled;
+                    Invoke(new Action(() => { b.Enabled = enabled; }));
+
+                    //b.Enabled = enabled;
                 }
             }
         }
@@ -82,7 +86,6 @@ namespace Assignment2
             {
                 graphics.FillEllipse(storedPiecesColors[i], storedPieces[i]);
             }
-
         }
 
         public void insertPieces(Brush playerColor, Rectangle rec, bool freeze)
@@ -107,6 +110,11 @@ namespace Assignment2
                 server.Start();
             }
 
+        }
+
+
+        public void N() {
+            
         }
 
         public void loopBack(bool loopback) {

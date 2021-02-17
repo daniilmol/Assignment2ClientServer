@@ -56,7 +56,7 @@ namespace Assignment2
                 Button b = c as Button;
                 if (b != null)
                 {
-                    b.Enabled = enabled;
+                    form.Invoke(new Action(() => { b.Enabled = enabled; }));
                 }
             }
         }
@@ -77,6 +77,7 @@ namespace Assignment2
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[0, HEIGHT - 1 - columnHeight(0)]));
                                 form.loopBack(false);
                                 Sender.SendGameMsg(0, 0 + "," + (HEIGHT - 1 - columnHeight(0)) + "," + currentPlayer);
+                                Sender.SendGameMsg(1, 1 + "");
                                 form.loopBack(true);
 
                                 currentPlayer = 1;
@@ -89,6 +90,7 @@ namespace Assignment2
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[0, HEIGHT - 1 - columnHeight(0)]));
                                 form.loopBack(false);
                                 Sender.SendGameMsg(0, 0 + "," + (HEIGHT - 1 - columnHeight(0)) + "," + currentPlayer);
+                                Sender.SendGameMsg(1, 1 + "");
                                 form.loopBack(true);
 
                                 currentPlayer = 0;
@@ -108,6 +110,7 @@ namespace Assignment2
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[1, HEIGHT - 1 - columnHeight(1)]));
                                 form.loopBack(false);
                                 Sender.SendGameMsg(0, 1 + "," + (HEIGHT - 1 - columnHeight(1)) + "," + currentPlayer);
+                                Sender.SendGameMsg(1, 1 + "");
                                 form.loopBack(true);
                                 currentPlayer = 1;
                                 break;
@@ -118,6 +121,8 @@ namespace Assignment2
                                 form.loopBack(false);
 
                                 Sender.SendGameMsg(0, 1 + "," + (HEIGHT - 1 - columnHeight(1)) + "," + currentPlayer);
+                                Sender.SendGameMsg(1, 1 + "");
+
                                 form.loopBack(true);
 
                                 currentPlayer = 0;
@@ -137,6 +142,8 @@ namespace Assignment2
                                 form.loopBack(false);
 
                                 Sender.SendGameMsg(0, 2 + "," + (HEIGHT - 1 - columnHeight(2)) + "," + currentPlayer);
+                                Sender.SendGameMsg(1, 1 + "");
+
                                 form.loopBack(true);
 
                                 currentPlayer = 1;
@@ -148,6 +155,8 @@ namespace Assignment2
                                 form.loopBack(false);
 
                                 Sender.SendGameMsg(0, 2 + "," + (HEIGHT - 1 - columnHeight(2)) + "," + currentPlayer);
+                                Sender.SendGameMsg(1, 1 + "");
+
                                 form.loopBack(true);
 
                                 currentPlayer = 0;
@@ -167,6 +176,8 @@ namespace Assignment2
                                 form.loopBack(false);
 
                                 Sender.SendGameMsg(0, 3 + "," + (HEIGHT - 1 - columnHeight(3)) + "," + currentPlayer);
+                                Sender.SendGameMsg(1, 1 + "");
+
                                 form.loopBack(true);
 
                                 currentPlayer = 1;
@@ -178,6 +189,8 @@ namespace Assignment2
                                 form.loopBack(false);
 
                                 Sender.SendGameMsg(0, 3 + "," + (HEIGHT - 1 - columnHeight(3)) + "," + currentPlayer);
+                                Sender.SendGameMsg(1, 1 + "");
+
                                 form.loopBack(true);
 
                                 currentPlayer = 0;
@@ -197,6 +210,8 @@ namespace Assignment2
                                 form.loopBack(false);
 
                                 Sender.SendGameMsg(0, 4 + "," + (HEIGHT - 1 - columnHeight(4)) + "," + currentPlayer);
+                                Sender.SendGameMsg(1, 1 + "");
+
                                 form.loopBack(true);
 
                                 currentPlayer = 1;
@@ -208,6 +223,8 @@ namespace Assignment2
                                 form.loopBack(false);
 
                                 Sender.SendGameMsg(0, 4 + "," + (HEIGHT - 1 - columnHeight(4)) + "," + currentPlayer);
+                                Sender.SendGameMsg(1, 1 + "");
+
                                 form.loopBack(true);
 
                                 currentPlayer = 0;
@@ -227,6 +244,8 @@ namespace Assignment2
                                 form.loopBack(false);
 
                                 Sender.SendGameMsg(0, 5 + "," + (HEIGHT - 1 - columnHeight(5)) + "," + currentPlayer);
+                                Sender.SendGameMsg(1, 1 + "");
+
                                 form.loopBack(true);
 
                                 currentPlayer = 1;
@@ -238,6 +257,8 @@ namespace Assignment2
                                 form.loopBack(false);
 
                                 Sender.SendGameMsg(0, 5 + "," + (HEIGHT - 1 - columnHeight(5)) + "," + currentPlayer);
+                                Sender.SendGameMsg(1, 1 + "");
+
                                 form.loopBack(true);
 
                                 currentPlayer = 0;
@@ -257,6 +278,8 @@ namespace Assignment2
                                 form.loopBack(false);
 
                                 Sender.SendGameMsg(0, 6 + "," + (HEIGHT - 1 - columnHeight(6)) + "," + currentPlayer);
+                                Sender.SendGameMsg(1, 1 + "");
+
                                 form.loopBack(true);
 
                                 currentPlayer = 1;
@@ -268,6 +291,8 @@ namespace Assignment2
                                 form.loopBack(false);
 
                                 Sender.SendGameMsg(0, 6 + "," + (HEIGHT - 1 - columnHeight(6)) + "," + currentPlayer);
+                                Sender.SendGameMsg(1, 1 + "");
+
                                 form.loopBack(true);
 
                                 currentPlayer = 0;
@@ -276,6 +301,7 @@ namespace Assignment2
                     }
                     break;
             }
+            freezeBoard(false);
         }
 
         public static int columnHeight(int columnNo)

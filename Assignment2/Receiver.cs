@@ -32,6 +32,7 @@ namespace Assignment2
             IPAddress localIP = IPAddress.Any;
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             IPEndPoint test = new IPEndPoint(localIP, Program.PORT);
+
             try
             {
                 isHost = true;
@@ -144,7 +145,18 @@ namespace Assignment2
                             Game.board[x, Game.HEIGHT - 1 - Game.columnHeight(x)].setColor(Color.Yellow);
                             Game.currentPlayer = 1;
                         }
+                    gameArea.freezeBoard(true);
                         break;
+                case 1:
+                    if (int.Parse(ar[1]) == 0)
+                    {
+
+                    }
+                    else {
+                        Debug.WriteLine("Froze Baord");
+                        gameArea.N();
+                    }
+                    break;
                     case -1: // disconnect
                              //playerID = Guid.Parse(ar[1]);
                              //playerNum = int.Parse(ar[2]);
