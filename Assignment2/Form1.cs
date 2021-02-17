@@ -109,6 +109,9 @@ namespace Assignment2
 
         }
 
+        public void loopBack(bool loopback) {
+            receiver.SetMulticastLoopback(loopback);
+        }
 
     }
 }

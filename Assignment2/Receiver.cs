@@ -29,30 +29,34 @@ namespace Assignment2
         }
         public Receiver(Form1 gameArea)
         {
-
+            IPAddress localIP = IPAddress.Any;
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-            IPEndPoint test = new IPEndPoint(IPAddress.Any, Program.PORT);
-            //try
-            //{
-                sock.Bind(test);
+            IPEndPoint test = new IPEndPoint(localIP, Program.PORT);
+            try
+            {
                 isHost = true;
                 sock.MulticastLoopback = true;
-                sock.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership, new MulticastOption(IPAddress.Parse("239.50.50.51")));
-
+                //sock.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership, new MulticastOption(IPAddress.Parse("239.50.50.51")));
+                sock.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, 1);
+                sock.Bind(test);
+                MulticastOption mo = new MulticastOption(IPAddress.Parse("239.50.50.51"), localIP);
+                sock.SetSocketOption(SocketOptionLevel.IP,
+                                        SocketOptionName.AddMembership,
+                                        mo);
                 //gameArea.freezeBoard(false);
 
-            //}
-            //catch (Exception e)
-            //{
-                //bTest = true;
-                //Console.WriteLine($"Already opened, {e}");
-                //isHost = false;
-                //sock.MulticastLoopback = false;
+            }
+            catch (Exception e)
+            {
+            //bTest = true;
+            //Console.WriteLine($"Already opened, {e}");
+            //isHost = false;
+            //sock.MulticastLoopback = false;
 
 
 
-                //gameArea.freezeBoard(true);
-            //}
+            //gameArea.freezeBoard(true);
+            }
 
 
 
@@ -79,6 +83,8 @@ namespace Assignment2
                         int recv = sock.ReceiveFrom(data, ref ep);
                         string stringData = Encoding.ASCII.GetString(data, 0, recv);
                         StringReader reader = new StringReader(stringData);
+                        sock.MulticastLoopback = false;
+
                         HandleGameMsg(reader.ReadLine());
                         Console.WriteLine("Ran handle game message method");
                     }
