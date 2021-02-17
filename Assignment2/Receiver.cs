@@ -32,8 +32,8 @@ namespace Assignment2
 
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             IPEndPoint test = new IPEndPoint(IPAddress.Any, Program.PORT);
-            try
-            {
+            //try
+            //{
                 sock.Bind(test);
                 isHost = true;
                 sock.MulticastLoopback = true;
@@ -41,18 +41,18 @@ namespace Assignment2
 
                 //gameArea.freezeBoard(false);
 
-            }
-            catch (Exception e)
-            {
-                bTest = true;
-                Console.WriteLine($"Already opened, {e}");
-                isHost = false;
+            //}
+            //catch (Exception e)
+            //{
+                //bTest = true;
+                //Console.WriteLine($"Already opened, {e}");
+                //isHost = false;
                 //sock.MulticastLoopback = false;
 
 
 
                 //gameArea.freezeBoard(true);
-            }
+            //}
 
 
 
@@ -138,12 +138,6 @@ namespace Assignment2
                             Game.board[x, Game.HEIGHT - 1 - Game.columnHeight(x)].setColor(Color.Yellow);
                             Game.currentPlayer = 1;
                         }
-                        //playerID = Guid.Parse(ar[1]);
-                        //playerNum = int.Parse(ar[2]);
-                        //x = int.Parse(ar[3]);
-                        //y = int.Parse(ar[4]);
-                        //dir = int.Parse(ar[5]);
-                        //form.MovePlayer(playerID, playerNum, x, y, dir);
                         break;
                     case -1: // disconnect
                              //playerID = Guid.Parse(ar[1]);
