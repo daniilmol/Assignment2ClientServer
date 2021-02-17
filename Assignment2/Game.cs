@@ -416,7 +416,7 @@ namespace Assignment2
                             break;
                     }
                 }
-                if (slotCount >= 4)
+                if (slotCount >= 5)
                     return true;
             }
 
