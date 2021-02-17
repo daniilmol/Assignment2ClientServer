@@ -79,6 +79,7 @@ namespace Assignment2
                                 int winningIndex = 0;
                                 if (checkWinState(board[0, HEIGHT - 2 - columnHeight(0)])){
                                     winningIndex = 1;
+                                    createText("Red");
                                 }
                                 Sender.SendGameMsg(0, 0 + "," + (HEIGHT - 2 - columnHeight(0)) + "," + currentPlayer + "," + winningIndex);
                                 
@@ -96,6 +97,8 @@ namespace Assignment2
                                 winningIndex = 0;
                                 if (checkWinState(board[0, HEIGHT - 2 - columnHeight(0)]))
                                 {
+                                    createText("Yellow");
+
                                     winningIndex = 1;
                                 }
                                 Sender.SendGameMsg(0, 0 + "," + (HEIGHT - 2 - columnHeight(0)) + "," + currentPlayer + "," + winningIndex);
@@ -121,6 +124,8 @@ namespace Assignment2
                                 int winningIndex = 0;
                                 if (checkWinState(board[1, HEIGHT - 2 - columnHeight(1)]))
                                 {
+                                    createText("Red");
+
                                     winningIndex = 1;
                                 }
                                 Sender.SendGameMsg(0, 1 + "," + (HEIGHT - 2 - columnHeight(1)) + "," + currentPlayer + "," + winningIndex);
@@ -136,6 +141,8 @@ namespace Assignment2
                                 winningIndex = 0;
                                 if (checkWinState(board[1, HEIGHT - 2 - columnHeight(1)]))
                                 {
+                                    createText("Yellow");
+
                                     winningIndex = 1;
                                 }
                                 Sender.SendGameMsg(0, 1 + "," + (HEIGHT - 2 - columnHeight(1)) + "," + currentPlayer + "," + winningIndex);
@@ -161,6 +168,8 @@ namespace Assignment2
                                 int winningIndex = 0;
                                 if (checkWinState(board[2, HEIGHT - 2 - columnHeight(2)]))
                                 {
+                                    createText("Red");
+
                                     winningIndex = 1;
                                 }
                                 Sender.SendGameMsg(0, 2 + "," + (HEIGHT - 2 - columnHeight(2)) + "," + currentPlayer + "," + winningIndex);
@@ -178,6 +187,8 @@ namespace Assignment2
                                 winningIndex = 0;
                                 if (checkWinState(board[2, HEIGHT - 2 - columnHeight(2)]))
                                 {
+                                    createText("Yellow");
+
                                     winningIndex = 1;
                                 }
                                 Sender.SendGameMsg(0, 2 + "," + (HEIGHT - 2 - columnHeight(2)) + "," + currentPlayer + "," + winningIndex);
@@ -203,6 +214,8 @@ namespace Assignment2
                                 int winningIndex = 0;
                                 if (checkWinState(board[3, HEIGHT - 2 - columnHeight(3)]))
                                 {
+                                    createText("Red");
+
                                     winningIndex = 1;
                                 }
                                 Sender.SendGameMsg(0, 3 + "," + (HEIGHT - 2 - columnHeight(3)) + "," + currentPlayer + "," + winningIndex);
@@ -220,6 +233,8 @@ namespace Assignment2
                                 winningIndex = 0;
                                 if (checkWinState(board[3, HEIGHT - 2 - columnHeight(3)]))
                                 {
+                                    createText("Yellow");
+
                                     winningIndex = 1;
                                 }
                                 Sender.SendGameMsg(0, 3 + "," + (HEIGHT - 2 - columnHeight(3)) + "," + currentPlayer + "," + winningIndex);
@@ -245,6 +260,8 @@ namespace Assignment2
                                 int winningIndex = 0;
                                 if (checkWinState(board[4, HEIGHT - 2 - columnHeight(4)]))
                                 {
+                                    createText("Red");
+
                                     winningIndex = 1;
                                 }
                                 Sender.SendGameMsg(0, 4 + "," + (HEIGHT - 2 - columnHeight(4)) + "," + currentPlayer + "," + winningIndex);
@@ -262,6 +279,8 @@ namespace Assignment2
                                 winningIndex = 0;
                                 if (checkWinState(board[4, HEIGHT - 2 - columnHeight(4)]))
                                 {
+                                    createText("Yellow");
+
                                     winningIndex = 1;
                                 }
                                 Sender.SendGameMsg(0, 4 + "," + (HEIGHT - 2 - columnHeight(4)) + "," + currentPlayer + "," + winningIndex);
@@ -287,6 +306,8 @@ namespace Assignment2
                                 int winningIndex = 0;
                                 if (checkWinState(board[5, HEIGHT - 2 - columnHeight(5)]))
                                 {
+                                    createText("Red");
+
                                     winningIndex = 1;
                                 }
                                 Sender.SendGameMsg(0, 5 + "," + (HEIGHT - 2 - columnHeight(5)) + "," + currentPlayer + "," + winningIndex);
@@ -304,6 +325,8 @@ namespace Assignment2
                                 winningIndex = 0;
                                 if (checkWinState(board[5, HEIGHT - 2 - columnHeight(5)]))
                                 {
+                                    createText("Yellow");
+
                                     winningIndex = 1;
                                 }
                                 Sender.SendGameMsg(0, 5 + "," + (HEIGHT - 2 - columnHeight(5)) + "," + currentPlayer + "," + winningIndex);
@@ -330,6 +353,7 @@ namespace Assignment2
                                 if (checkWinState(board[6, HEIGHT - 2 - columnHeight(6)]))
                                 {
                                     winningIndex = 1;
+                                    createText("Red");
                                 }
                                 Sender.SendGameMsg(0, 6 + "," + (HEIGHT - 2 - columnHeight(6)) + "," + currentPlayer + "," + winningIndex);
 
@@ -346,6 +370,8 @@ namespace Assignment2
                                 winningIndex = 0;
                                 if (checkWinState(board[6, HEIGHT - 2 - columnHeight(6)]))
                                 {
+                                    createText("Yellow");
+
                                     winningIndex = 1;
                                 }
                                 Sender.SendGameMsg(0, 6 + "," + (HEIGHT - 2 - columnHeight(6)) + "," + currentPlayer + "," + winningIndex);
@@ -434,5 +460,16 @@ namespace Assignment2
         }
 
         public Rectangle[] getBorders() { return this.borders; }
+        private void createText(string winner)
+        {
+            Point newLoc = new Point(1000, 300);
+            TextBox b = new TextBox();
+            b.Text = winner + " is the winner!";
+            b.Size = new Size(300, 50);
+            b.Location = newLoc;
+            b.Enabled = false;
+            //newLoc.Offset(0, b.Height + 5);
+            form.Invoke(new Action(() => { form.Controls.Add(b); }));
+        }
     }
 }

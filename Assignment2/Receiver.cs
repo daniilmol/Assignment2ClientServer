@@ -157,11 +157,13 @@ namespace Assignment2
                             gameArea.freezeBoard(false);
                             gameArea.insertPieces(Brushes.Red, Game.grid[x, Game.columnHeight(x)]);
                             Game.board[x, Game.HEIGHT - 1 - Game.columnHeight(x)].setColor(Color.Red);
+                            createText("Red");
                         }
                         else if (player == 1) {
                             gameArea.freezeBoard(false);
                             gameArea.insertPieces(Brushes.Yellow, Game.grid[x, Game.columnHeight(x)]);
                             Game.board[x, Game.HEIGHT - 1 - Game.columnHeight(x)].setColor(Color.Yellow);
+                            createText("Yellow");
                         }
                         }
                         
@@ -169,6 +171,16 @@ namespace Assignment2
                     case 1:
                         break;
                 }
+        }
+        private void createText(string winner) {
+            Point newLoc = new Point(1000, 300);
+            TextBox b = new TextBox();
+            b.Text = winner + " is the winner!";
+            b.Size = new Size(300, 50);
+            b.Location = newLoc;
+            b.Enabled = false;
+            //newLoc.Offset(0, b.Height + 5);
+            gameArea.Invoke(new Action(() => { gameArea.Controls.Add(b); }));
         }
     }
 }
