@@ -28,7 +28,6 @@ namespace Assignment2
         private bool frozen;
         private bool running = true;
 
-        public Game getGame(){return game;}
 
         public Form1()
         {

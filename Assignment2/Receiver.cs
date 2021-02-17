@@ -29,7 +29,7 @@ namespace Assignment2
         }
         public Receiver(Form1 gameArea)
         {
-            IPAddress localIP = IPAddress.Any;
+            IPAddress localIP = IPAddress.Parse("25.9.58.54");
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             IPEndPoint test = new IPEndPoint(localIP, Program.PORT);
 
@@ -49,6 +49,7 @@ namespace Assignment2
             }
             catch (Exception e)
             {
+                Debug.WriteLine(e);
             //bTest = true;
             //Console.WriteLine($"Already opened, {e}");
             //isHost = false;
@@ -147,7 +148,6 @@ namespace Assignment2
                             Game.currentPlayer = 1;
                             gameArea.freezeBoard(true);
                         }
-                    gameArea.freezeBoard(true);
                         break;
                 case 1:
                     if (int.Parse(ar[1]) == 0)
