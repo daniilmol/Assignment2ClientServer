@@ -76,7 +76,11 @@ namespace Assignment2
                                 board[0, HEIGHT - 1 - columnHeight(0)].setColor(Color.Red);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[0, HEIGHT - 2 - columnHeight(0)]));
                                 form.loopBack(false);
-                                Sender.SendGameMsg(0, 0 + "," + (HEIGHT - 2 - columnHeight(0)) + "," + currentPlayer + "," + checkWinState(board[0, HEIGHT - 2 - columnHeight(0)]));
+                                int winningIndex = 0;
+                                if (checkWinState(board[0, HEIGHT - 2 - columnHeight(0)])){
+                                    winningIndex = 1;
+                                }
+                                Sender.SendGameMsg(0, 0 + "," + (HEIGHT - 2 - columnHeight(0)) + "," + currentPlayer + "," + winningIndex);
                                 
                                 form.loopBack(true);
 
@@ -89,8 +93,13 @@ namespace Assignment2
                                 board[0, HEIGHT - 1 - columnHeight(0)].setColor(Color.Yellow);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[0, HEIGHT - 2 - columnHeight(0)]));
                                 form.loopBack(false);
-                                Sender.SendGameMsg(0, 0 + "," + (HEIGHT - 2 - columnHeight(0)) + "," + currentPlayer + "," + checkWinState(board[0, HEIGHT - 2 - columnHeight(0)]));
-                                
+                                winningIndex = 0;
+                                if (checkWinState(board[0, HEIGHT - 2 - columnHeight(0)]))
+                                {
+                                    winningIndex = 1;
+                                }
+                                Sender.SendGameMsg(0, 0 + "," + (HEIGHT - 2 - columnHeight(0)) + "," + currentPlayer + "," + winningIndex);
+
                                 form.loopBack(true);
 
                                 currentPlayer = 0;
@@ -109,8 +118,13 @@ namespace Assignment2
                                 board[1, HEIGHT - 1 - columnHeight(1)].setColor(Color.Red);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[1, HEIGHT - 2 - columnHeight(1)]));
                                 form.loopBack(false);
-                                Sender.SendGameMsg(0, 1 + "," + (HEIGHT - 2 - columnHeight(1)) + "," + currentPlayer + "," + checkWinState(board[1, HEIGHT - 2 - columnHeight(1)]));
-                                
+                                int winningIndex = 0;
+                                if (checkWinState(board[1, HEIGHT - 2 - columnHeight(1)]))
+                                {
+                                    winningIndex = 1;
+                                }
+                                Sender.SendGameMsg(0, 1 + "," + (HEIGHT - 2 - columnHeight(1)) + "," + currentPlayer + "," + winningIndex);
+
                                 form.loopBack(true);
                                 currentPlayer = 1;
                                 break;
@@ -119,9 +133,13 @@ namespace Assignment2
                                 board[1, HEIGHT - 1 - columnHeight(1)].setColor(Color.Yellow);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[1, HEIGHT - 2 - columnHeight(1)]));
                                 form.loopBack(false);
+                                winningIndex = 0;
+                                if (checkWinState(board[1, HEIGHT - 2 - columnHeight(1)]))
+                                {
+                                    winningIndex = 1;
+                                }
+                                Sender.SendGameMsg(0, 1 + "," + (HEIGHT - 2 - columnHeight(1)) + "," + currentPlayer + "," + winningIndex);
 
-                                Sender.SendGameMsg(0, 1 + "," + (HEIGHT - 2 - columnHeight(1)) + "," + currentPlayer + "," + checkWinState(board[1, HEIGHT - 2 - columnHeight(1)]));
-                                
 
                                 form.loopBack(true);
 
@@ -140,9 +158,13 @@ namespace Assignment2
                                 board[2, HEIGHT - 1 - columnHeight(2)].setColor(Color.Red);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[2, HEIGHT - 2 - columnHeight(2)]));
                                 form.loopBack(false);
+                                int winningIndex = 0;
+                                if (checkWinState(board[2, HEIGHT - 2 - columnHeight(2)]))
+                                {
+                                    winningIndex = 1;
+                                }
+                                Sender.SendGameMsg(0, 2 + "," + (HEIGHT - 2 - columnHeight(2)) + "," + currentPlayer + "," + winningIndex);
 
-                                Sender.SendGameMsg(0, 2 + "," + (HEIGHT - 2 - columnHeight(2)) + "," + currentPlayer + "," + checkWinState(board[2, HEIGHT - 2 - columnHeight(2)]));
-                                
 
                                 form.loopBack(true);
 
@@ -153,9 +175,13 @@ namespace Assignment2
                                 board[2, HEIGHT - 1 - columnHeight(2)].setColor(Color.Yellow);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[2, HEIGHT - 2 - columnHeight(2)]));
                                 form.loopBack(false);
+                                winningIndex = 0;
+                                if (checkWinState(board[2, HEIGHT - 2 - columnHeight(2)]))
+                                {
+                                    winningIndex = 1;
+                                }
+                                Sender.SendGameMsg(0, 2 + "," + (HEIGHT - 2 - columnHeight(2)) + "," + currentPlayer + "," + winningIndex);
 
-                                Sender.SendGameMsg(0, 2 + "," + (HEIGHT - 2 - columnHeight(2)) + "," + currentPlayer + "," + checkWinState(board[2, HEIGHT - 2 - columnHeight(2)]));
-                                
 
                                 form.loopBack(true);
 
@@ -174,9 +200,13 @@ namespace Assignment2
                                 board[3, HEIGHT - 1 - columnHeight(3)].setColor(Color.Red);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[3, HEIGHT - 2 - columnHeight(3)]));
                                 form.loopBack(false);
+                                int winningIndex = 0;
+                                if (checkWinState(board[3, HEIGHT - 2 - columnHeight(3)]))
+                                {
+                                    winningIndex = 1;
+                                }
+                                Sender.SendGameMsg(0, 3 + "," + (HEIGHT - 2 - columnHeight(3)) + "," + currentPlayer + "," + winningIndex);
 
-                                Sender.SendGameMsg(0, 3 + "," + (HEIGHT - 2 - columnHeight(3)) + "," + currentPlayer + "," + checkWinState(board[3, HEIGHT - 2 - columnHeight(3)]));
-                                
 
                                 form.loopBack(true);
 
@@ -187,9 +217,13 @@ namespace Assignment2
                                 board[3, HEIGHT - 1 - columnHeight(3)].setColor(Color.Yellow);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[3, HEIGHT - 2 - columnHeight(3)]));
                                 form.loopBack(false);
+                                winningIndex = 0;
+                                if (checkWinState(board[3, HEIGHT - 2 - columnHeight(3)]))
+                                {
+                                    winningIndex = 1;
+                                }
+                                Sender.SendGameMsg(0, 3 + "," + (HEIGHT - 2 - columnHeight(3)) + "," + currentPlayer + "," + winningIndex);
 
-                                Sender.SendGameMsg(0, 3 + "," + (HEIGHT - 2 - columnHeight(3)) + "," + currentPlayer + "," + checkWinState(board[3, HEIGHT - 2 - columnHeight(3)]));
-                                
 
                                 form.loopBack(true);
 
@@ -208,9 +242,13 @@ namespace Assignment2
                                 board[4, HEIGHT - 1 - columnHeight(4)].setColor(Color.Red);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[4, HEIGHT - 2 - columnHeight(4)]));
                                 form.loopBack(false);
+                                int winningIndex = 0;
+                                if (checkWinState(board[4, HEIGHT - 2 - columnHeight(4)]))
+                                {
+                                    winningIndex = 1;
+                                }
+                                Sender.SendGameMsg(0, 4 + "," + (HEIGHT - 2 - columnHeight(4)) + "," + currentPlayer + "," + winningIndex);
 
-                                Sender.SendGameMsg(0, 4 + "," + (HEIGHT - 2 - columnHeight(4)) + "," + currentPlayer + "," + checkWinState(board[4, HEIGHT - 2 - columnHeight(4)]));
-                                
 
                                 form.loopBack(true);
 
@@ -221,9 +259,13 @@ namespace Assignment2
                                 board[4, HEIGHT - 1 - columnHeight(4)].setColor(Color.Yellow);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[4, HEIGHT - 2 - columnHeight(4)]));
                                 form.loopBack(false);
+                                winningIndex = 0;
+                                if (checkWinState(board[4, HEIGHT - 2 - columnHeight(4)]))
+                                {
+                                    winningIndex = 1;
+                                }
+                                Sender.SendGameMsg(0, 4 + "," + (HEIGHT - 2 - columnHeight(4)) + "," + currentPlayer + "," + winningIndex);
 
-                                Sender.SendGameMsg(0, 4 + "," + (HEIGHT - 2 - columnHeight(4)) + "," + currentPlayer + "," + checkWinState(board[4, HEIGHT - 2 - columnHeight(4)]));
-                                
 
                                 form.loopBack(true);
 
@@ -242,9 +284,13 @@ namespace Assignment2
                                 board[5, HEIGHT - 1 - columnHeight(5)].setColor(Color.Red);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[5, HEIGHT - 2 - columnHeight(5)]));
                                 form.loopBack(false);
+                                int winningIndex = 0;
+                                if (checkWinState(board[5, HEIGHT - 2 - columnHeight(5)]))
+                                {
+                                    winningIndex = 1;
+                                }
+                                Sender.SendGameMsg(0, 5 + "," + (HEIGHT - 2 - columnHeight(5)) + "," + currentPlayer + "," + winningIndex);
 
-                                Sender.SendGameMsg(0, 5 + "," + (HEIGHT - 2 - columnHeight(5)) + "," + currentPlayer + "," + checkWinState(board[5, HEIGHT - 2 - columnHeight(5)]));
-                                
 
                                 form.loopBack(true);
 
@@ -255,9 +301,13 @@ namespace Assignment2
                                 board[5, HEIGHT - 1 - columnHeight(5)].setColor(Color.Yellow);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[5, HEIGHT - 2 - columnHeight(5)]));
                                 form.loopBack(false);
+                                winningIndex = 0;
+                                if (checkWinState(board[5, HEIGHT - 2 - columnHeight(5)]))
+                                {
+                                    winningIndex = 1;
+                                }
+                                Sender.SendGameMsg(0, 5 + "," + (HEIGHT - 2 - columnHeight(5)) + "," + currentPlayer + "," + winningIndex);
 
-                                Sender.SendGameMsg(0, 5 + "," + (HEIGHT - 2 - columnHeight(5)) + "," + currentPlayer + "," + checkWinState(board[5, HEIGHT - 2 - columnHeight(5)]));
-                                
 
                                 form.loopBack(true);
 
@@ -276,9 +326,13 @@ namespace Assignment2
                                 board[6, HEIGHT - 1 - columnHeight(6)].setColor(Color.Red);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[6, HEIGHT - 2 - columnHeight(6)]));
                                 form.loopBack(false);
+                                int winningIndex = 0;
+                                if (checkWinState(board[6, HEIGHT - 2 - columnHeight(6)]))
+                                {
+                                    winningIndex = 1;
+                                }
+                                Sender.SendGameMsg(0, 6 + "," + (HEIGHT - 2 - columnHeight(6)) + "," + currentPlayer + "," + winningIndex);
 
-                                Sender.SendGameMsg(0, 6 + "," + (HEIGHT - 2 - columnHeight(6)) + "," + currentPlayer + "," + checkWinState(board[6, HEIGHT - 2 - columnHeight(6)]));
-                                
 
                                 form.loopBack(true);
 
@@ -289,9 +343,13 @@ namespace Assignment2
                                 board[6, HEIGHT - 1 - columnHeight(6)].setColor(Color.Yellow);
                                 System.Diagnostics.Debug.WriteLine(checkWinState(board[6, HEIGHT - 2 - columnHeight(6)]));
                                 form.loopBack(false);
+                                winningIndex = 0;
+                                if (checkWinState(board[6, HEIGHT - 2 - columnHeight(6)]))
+                                {
+                                    winningIndex = 1;
+                                }
+                                Sender.SendGameMsg(0, 6 + "," + (HEIGHT - 2 - columnHeight(6)) + "," + currentPlayer + "," + winningIndex);
 
-                                Sender.SendGameMsg(0, 6 + "," + (HEIGHT - 2 - columnHeight(6)) + "," + currentPlayer + "," + checkWinState(board[6, HEIGHT - 2 - columnHeight(6)]));
-                                
 
                                 form.loopBack(true);
 

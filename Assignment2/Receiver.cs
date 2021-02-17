@@ -30,7 +30,7 @@ namespace Assignment2
         }
         public Receiver(Form1 gameArea)
         {
-            IPAddress localIP = IPAddress.Parse("25.9.58.54");
+            IPAddress localIP = IPAddress.Any;
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             IPEndPoint test = new IPEndPoint(localIP, Program.PORT);
 
@@ -132,9 +132,9 @@ namespace Assignment2
                 switch (type)
                 {
                     case 0: // peg placement
-                        if(int.Parse(ar[4]) == 0){
-                            x = int.Parse(ar[1]);
-                            int player = int.Parse(ar[3]);
+                    x = int.Parse(ar[1]);
+                    int player = int.Parse(ar[3]);
+                    if (int.Parse(ar[4]) == 0){
                             Console.WriteLine("Player is: " + player);
                             if (player == 0)
                             {
@@ -152,7 +152,17 @@ namespace Assignment2
                             }
                             gameArea.freezeBoard(true);
                         } else {
+                        if (player == 0)
+                        {
                             gameArea.freezeBoard(false);
+                            gameArea.insertPieces(Brushes.Red, Game.grid[x, Game.columnHeight(x)]);
+                            Game.board[x, Game.HEIGHT - 1 - Game.columnHeight(x)].setColor(Color.Red);
+                        }
+                        else if (player == 1) {
+                            gameArea.freezeBoard(false);
+                            gameArea.insertPieces(Brushes.Yellow, Game.grid[x, Game.columnHeight(x)]);
+                            Game.board[x, Game.HEIGHT - 1 - Game.columnHeight(x)].setColor(Color.Yellow);
+                        }
                         }
                         
                         break;
